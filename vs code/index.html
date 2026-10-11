@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ჩემი სიხარული გოგოოო 💖</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 26px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .frame {
+    background: #fff;
+    padding: 12px 12px 70px;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+    animation: pop 0.6s;
+  }
+
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .frame img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 16px;
+    color: #333;
+    padding: 0 15px;
+  }
+
+  .final {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 480px;
+  }
+
+  .final.show { display: block; animation: pop 0.6s; }
+
+  .final h1 {
+    font-size: 30px;
+    color: #ff6b9d;
+    text-shadow: 2px 2px 0 #fff;
+    margin-bottom: 20px;
+  }
+
+  .final p {
+    font-size: 19px;
+    color: #8b4513;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  .hearts {
+    font-size: 45px;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  @media (max-width: 500px) {
+    .frame img { height: 320px; }
+    h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+  <h1 id="title">ჩემი საყვარელი 💖</h1>
+
+  <div class="frame" id="frame">
+    <img id="photo" src="foto1.jpg" alt="ფოტო">
+    <div class="caption" id="caption"></div>
+  </div>
+
+  <div class="final" id="final">
+    <h1> საუკეთესო ადამიანი ხარ! ნინუკკკ 💖</h1>
+    <p>მადლობა გვერდში დგომისთვის,<br>ყველა დებილობაში რომ მყვები,<br>და ყველა კარგი მომენტისთვის.</p>
+    <div class="hearts">💕  💕</div>
+  </div>
+
+<script>
+  const photos = [
+    { src: "foto1.jpg", caption: "პატალა პლინცესააა" },
+    { src: "foto2.jpg", caption: "ძერსკები As Always" },
+    { src: "foto3.jpg", caption: "ლოთი ბასიაკები" },
+    { src: "foto4.jpg", caption: "პეპლუკაა" },
+    { src: "foto5.jpg", caption: "ლოთს მეორე ლოთი ფოტოს უღებს" },
+    { src: "foto6.jpg", caption: "ეს პატარა ნათია ვამაყობ შენით ძვირფფ" }
+  ];
+
+  let i = 0;
+  const photo = document.getElementById('photo');
+  const caption = document.getElementById('caption');
+  const frame = document.getElementById('frame');
+  const finalScreen = document.getElementById('final');
+  const title = document.getElementById('title');
+
+  // პირველი ფოტო მაშინვე გამოჩნდეს
+  photo.src = photos[0].src;
+  caption.textContent = photos[0].caption;
+
+  // ყოველ 3 წამში იცვლება თვითონ
+  const timer = setInterval(function() {
+    i++;
+
+    if (i >= photos.length) {
+      clearInterval(timer);
+      frame.style.display = 'none';
+      title.style.display = 'none';
+      finalScreen.classList.add('show');
+      return;
+    }
+
+    // ცოტა ანიმაცია გადართვისას
+    frame.style.opacity = '0';
+    setTimeout(function() {
+      photo.src = photos[i].src;
+      caption.textContent = photos[i].caption;
+      frame.style.opacity = '1';
+      frame.style.animation = 'none';
+      frame.offsetHeight;
+      frame.style.animation = 'pop 0.6s';
+    }, 300);
+
+  }, 3000); // 3000 = 3 წამი. თუ გინდა უფრო სწრაფად, ჩაწერე 2000
+</script>
+</body>
+</html>
